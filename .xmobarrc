@@ -1,17 +1,14 @@
 Config {
   font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
-  , borderColor = "black"
+  , borderColor = "#073642"
   , border = TopB
-  , bgColor = "black"
-  , fgColor = "green"
+  , bgColor = "#002b36"
+  , fgColor = "#2aa198"
   , position = TopW L 100
   , overrideRedirect = True
   , lowerOnStart = True
   , hideOnStart = False
   , commands = [ Run Com "uname" ["-sr"] "" 0
-	       , Run Com "/home/User1/Bash/xmonadInit/getVolume.sh" [] "getVolume" 50
-	       , Run Com "/home/User1/Bash/xmonadInit/getConnection.sh" [] "getConnection" 50
-	       , Run Com "/home/User1/Bash/xmonadInit/getBrightness.sh" [] "getBrightness" 50
 	       , Run Battery [ "--template" , "Batt: <acstatus>"
                              , "--Low"      , "10"        
                              , "--High"     , "80"        
@@ -25,9 +22,13 @@ Config {
                                        , "-i"	, "<fc=#006000>Charged</fc>"
                              ] 50
 	       ,Run Com "date" ["+%_I:%M%p"] "" 600
-	       ,Run StdinReader ]
+	       ,Run Com "/home/user1/Bash/Xmonad/getvolume.sh" [] "getVolume" 30
+	       ,Run Com "/home/user1/Bash/Xmonad/getWireless.sh" [] "getWireless" 30
+	       ,Run Com "/home/user1/Bash/Xmonad/getBrightness.sh" [] "getBrightness" 30
+	       ,Run Com "/home/user1/Bash/Xmonad/getBluetooth.sh" [] "getBluetooth" 30
+	       ,Run StdinReader]
   , sepChar = "%"
   , alignSep = "}{"
-  , template = "%uname% | %StdinReader% }{ %getBrightness% | %getVolume% | %getConnection% | %battery% | %date% "
+  , template = "%uname% | %StdinReader% }{ %getWireless% %getBluetooth% %getBrightness% %getVolume% | %battery% | %date%"
 
 }
