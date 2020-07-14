@@ -1,0 +1,34 @@
+Config {
+  font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
+  , borderColor = "#073642"
+  , border = TopB
+  , bgColor = "#002b36"
+  , fgColor = "#2aa198"
+  , position = TopW L 100
+  , overrideRedirect = True
+  , lowerOnStart = True
+  , hideOnStart = False
+  , commands = [ Run Com "uname" ["-sr"] "" 0
+	       , Run Battery [ "--template" , "Batt: <acstatus>"
+                             , "--Low"      , "10"        
+                             , "--High"     , "80"        
+                             , "--low"      , "darkred"
+                             , "--normal"   , "green"
+                             , "--high"     , "green"
+
+                             , "--" 
+                                       , "-o"	, "<left>% (<timeleft>)"
+                                       , "-O"	, "<fc=#dAA520>Charging</fc>"
+                                       , "-i"	, "<fc=#006000>Charged</fc>"
+                             ] 50
+	       ,Run Com "date" ["+%_I:%M%p"] "" 600
+	       ,Run Com "/home/user1/Bash/Xmonad/getvolume.sh" [] "getVolume" 30
+	       ,Run Com "/home/user1/Bash/Xmonad/getWireless.sh" [] "getWireless" 30
+	       ,Run Com "/home/user1/Bash/Xmonad/getBrightness.sh" [] "getBrightness" 30
+	       ,Run Com "/home/user1/Bash/Xmonad/getBluetooth.sh" [] "getBluetooth" 30
+	       ,Run StdinReader]
+  , sepChar = "%"
+  , alignSep = "}{"
+  , template = "%uname% | %StdinReader% }{ %getWireless% %getBluetooth% %getBrightness% %getVolume% | %battery% | %date%"
+
+}
