@@ -2,7 +2,8 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-echo "OCPoetry, just post it." 
+#echo "OCPoetry, just post it." 
+echo "Finish application"
 
 
 # Allow user to restart bash shell after changes are
@@ -10,6 +11,17 @@ echo "OCPoetry, just post it."
 function restart(){
     clear
     . ~/.bashrc
+}
+
+#if [ shopt -q login_shell ]; then
+#	if [ -f ~/.bashrc ]; then
+#		. ~/.bashrc
+#	fi
+#fi
+
+# Find the size of the harddrive and percent used, etc
+function hdspace(){
+    df -H | grep -e Filesystem -e ubuntu
 }
 
 # Launch Tor browser from any directory using terminal
@@ -110,7 +122,7 @@ fi
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # true (24 bit) colors
-export TERM=screen-24bit
+#export TERM=screen-24bit
 
 # some more ls aliases
 alias ll='ls -alF'
@@ -122,20 +134,26 @@ alias firefox='/home/user1/firefox/firefox &'
 #alias l=exa
 #alias ls='exa -l'
 alias ls='ls -l --color=auto'
-alias python='python3.7'
+alias python=python3
 alias xmobar='/home/user1/.cabal/bin/xmobar'
 #alias search=w3m
 #alias i2p='~/i2p/i2prouter'
 #alias wireshark='/usr/local/bin/wireshark'
+alias slime='emacs -f slime'
+
+#modify env variables
+export GOROOT=/usr/local/go
+export PYTHONDONTWRITEBYTECODE=1
+unset SSH_ASKPASS
+export SPICETIFY_INSTALL="/home/user1/spicetify-cli/"
 
 #modify path
 #export PATH='$PATH:/home/user1/.dat/releases/dat-13.12.2-linux-x64/dat'
 #export PYTHONPATH='$PYTHONPATH:/home/user1/.core_stable'
 export PATH=$PATH:/home/user1/.local/bin:/home/user1/.dat/releases/dat-13.13.1-linux-x64
-
-#modify env variables
-export PYTHONDONTWRITEBYTECODE=1
-unset SSH_ASKPASS
+export PATH=$PATH:$GOROOT/bin
+export PATH=$PATH:/home/user1/Brython
+export PATH=$PATH:$SPICETIFY_INSTALL
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
